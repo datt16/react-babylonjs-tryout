@@ -1,13 +1,10 @@
-import { useState } from 'react'
-import logo from './logo.svg'
 import './App.css'
+import { BoxScene } from './BoxScene'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <div className="App">
-      <canvas id='babylonJS'></canvas>
+    <div className='App'>
+      <BoxScene />
     </div>
   )
 }
