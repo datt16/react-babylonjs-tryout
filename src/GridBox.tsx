@@ -1,31 +1,13 @@
 import { Color3, Mesh } from '@babylonjs/core'
 import { Vector3 } from '@babylonjs/core/Maths/math.vector'
 import { GridMaterial } from 'babylonjs-materials'
-import { useControls } from 'leva'
 import { useRef } from 'react'
-import {
-  ArcRotateCamera,
-  Camera,
-  Engine,
-  Scene,
-  useScene,
-} from 'react-babylonjs'
-
-import * as Materials from 'babylonjs-materials'
+import { Engine, Scene } from 'react-babylonjs'
 
 import './App.css'
 
-export const BoxScene = () => {
+export const GridBoxScene = () => {
   const boxRef = useRef<Mesh>(null)
-
-  const scene = useScene()
-
-  const { x, y, z, camera } = useControls({
-    x: { value: 0, min: -5, max: 5 },
-    y: { value: 0, min: -5, max: 5 },
-    z: { value: 0, min: -5, max: 5 },
-    camera: { value: true },
-  })
 
   const groundRefFunc = (instance: any) => {
     if (!instance) return
@@ -41,14 +23,7 @@ export const BoxScene = () => {
     <div className='wrapper'>
       <Engine antialias adaptToDeviceRatio canvasId='babylonJS'>
         <Scene>
-          {/* <freeCamera
-            name='camera'
-            position={new Vector3(0, 5, -10)}
-            setTarget={[Vector3.Zero()]}
-          /> */}
-
           <arcRotateCamera
-            setEnabled={() => camera}
             alpha={1}
             beta={1}
             radius={4}
@@ -63,7 +38,7 @@ export const BoxScene = () => {
             intensity={1.2}
           />
 
-          <box name='box' ref={boxRef} size={2} position={new Vector3(x, y, z)}>
+          <box name='box' ref={boxRef} size={2} position={new Vector3(0, 0, 0)}>
             <standardMaterial
               name='box-material'
               diffuseColor={Color3.Teal()}
@@ -71,20 +46,9 @@ export const BoxScene = () => {
             />
           </box>
 
-          <box
-            name='box2'
-            ref={(i) => groundRefFunc(i)}
-            size={2}
-            position={new Vector3(10, 0, 0)}
-          ></box>
+          <box name='box2' size={2} position={new Vector3(10, 0, 0)}></box>
 
-          <ground
-            name='plane'
-            height={50}
-            width={50}
-            subdivisions={2}
-            ref={(i) => groundRefFunc(i)}
-          ></ground>
+          <ground name='plane' height={50} width={50} subdivisions={2}></ground>
         </Scene>
       </Engine>
     </div>

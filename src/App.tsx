@@ -1,10 +1,11 @@
 import './App.css'
 import { BoxScene } from './BoxScene'
+import { GridBoxScene } from './GridBox'
 
 function App() {
   return (
     <div className='App'>
-      <BoxScene />
+      <GridBoxScene />
     </div>
   )
 }
